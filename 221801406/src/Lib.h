@@ -12,6 +12,10 @@ string temp;
 vector<string> str;
 vector<string> words;
 map<string, int> strmap;
+map<string, int>::iterator iter;
+string mainWord;
+int w;
+int max;
 
 void ReadFile(string fName) //读取文件并缓存
 {
@@ -117,15 +121,40 @@ void CountWord(string fName)//统计单词数以及行数函数
 		}
 	}
 	cout << "words: " << words.size() << endl;
+	cout << "lines: " << lineNum << endl;
 
 	for (j = 0; j < words.size(); j++)
 	{
 		++strmap[words[j]];
 	}
-
-
-	cout << "lines: " << lineNum << endl;//输出
-
 }
 
 
+void CountMainWord()//词频统计与频率排行前十单词输出
+{
+	int time;
+	bool flag = true;
+	iter = strmap.begin();
+	int min_val = strmap.size() < 10 ? strmap.size() : 10;
+	for (int s1 = 0; s1 < min_val; s1++)//采用遍历10次的的方式，如果不足十次bool值置false跳出循环
+	{
+		if (flag == false)
+		{
+			break;
+		}
+		flag = true;
+		time = -1;
+		while (iter != strmap.end())//采用map函数进行存取遍历
+		{
+			if (iter->second > time)
+			{
+				time = iter->second;
+				mainWord = iter->first;
+			}
+			iter++;
+		}
+		cout << "<" << mainWord << ">: " << time << endl;
+		iter = strmap.begin();
+		strmap[mainWord] = -10;
+	}
+}

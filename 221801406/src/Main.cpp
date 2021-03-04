@@ -11,5 +11,6 @@ int main(int argc, char* argv[])
 {
 	CountChar("input.txt");
 	CountWord("input.txt");
+	CountMainWord();
 	return 0;
 }
