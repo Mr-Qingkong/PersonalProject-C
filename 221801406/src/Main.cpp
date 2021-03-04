@@ -10,5 +10,6 @@ using namespace std;
 int main(int argc, char* argv[])
 {
 	CountChar("input.txt");
+	CountWord("input.txt");
 	return 0;
 }
