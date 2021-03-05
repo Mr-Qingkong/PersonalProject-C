@@ -8,6 +8,7 @@ using namespace std;
 
 int charNum = 0;
 int lineNum = 0;
+
 string temp;
 vector<string> str;
 vector<string> words;
@@ -17,13 +18,13 @@ string mainWord;
 int max;
 
 
-void ReadFile(string fName) //¶ÁÈ¡ÎÄ¼ş²¢»º´æ
+void ReadFile(string fName) //è¯»å–æ–‡ä»¶å¹¶ç¼“å­˜
 {
 	char character;
 	ifstream fin(fName);
 	if (!fin)
 	{
-		cout << "open file error" << endl;//ÎÄ¼ş´ò¿ª·¢Éú´íÎó
+		cout << "open file error" << endl;//æ–‡ä»¶æ‰“å¼€å‘ç”Ÿé”™è¯¯
 	}
 	else
 	{
@@ -41,28 +42,27 @@ void ReadFile(string fName) //¶ÁÈ¡ÎÄ¼ş²¢»º´æ
 }
 
 
-void CountChar(string foutName) //Êä³ö×Ö·ûÍ³¼ÆÊı
+void CountChar(string foutName) //è¾“å‡ºå­—ç¬¦ç»Ÿè®¡æ•°
 {
 	ofstream fout(foutName);
-	fout << "characters£º" << charNum << endl;
+	fout << "charactersï¼š" << charNum << endl;
 	fout.close();
 }
 
 
-void CountWord(string foutName)//Í³¼Æµ¥´ÊÊıÒÔ¼°ĞĞÊıº¯Êı
+void CountWord(string foutName)//ç»Ÿè®¡å•è¯æ•°ä»¥åŠè¡Œæ•°å‡½æ•°
 {
-	ofstream fout(foutName, ios::app);//×¢ÒâÒªÊ¹ÓÃ×·¼Ó·½Ê½´ò¿ªÎÄ¼ş
+	ofstream fout(foutName, ios::app);//æ³¨æ„è¦ä½¿ç”¨è¿½åŠ æ–¹å¼æ‰“å¼€æ–‡ä»¶
 	string tempLetterNum;
 	string tempLine;
 	int j;
-
 	for (j = 0; j < charNum; j++)
 	{
 		if (temp[j] == '\n')
 		{
 			for (int i = 0; i != temp.size(); i++)
 			{
-				if (tempLine[i] > 32)//¸ù¾İÌâÄ¿ÒªÇóÈÏÎªasciiÂë´óÓÚ32ÊÓÎª·Ç¿Õ°××Ö·û£¬ÏÂÍ¬
+				if (tempLine[i] > 32)//æ ¹æ®é¢˜ç›®è¦æ±‚è®¤ä¸ºasciiç å¤§äº32è§†ä¸ºéç©ºç™½å­—ç¬¦ï¼Œä¸‹åŒ
 				{
 					++lineNum;
 					break;
@@ -77,7 +77,7 @@ void CountWord(string foutName)//Í³¼Æµ¥´ÊÊıÒÔ¼°ĞĞÊıº¯Êı
 
 		if ((temp[j] >= '0' && temp[j] <= '9') ||
 			(temp[j] >= 'A' && temp[j] <= 'Z') ||
-			(temp[j] >= 'a' && temp[j] <= 'z'))//´¢´æ×ÖÄ¸Êı×Ö·ûºÅ
+			(temp[j] >= 'a' && temp[j] <= 'z'))//å‚¨å­˜å­—æ¯æ•°å­—ç¬¦å·
 		{
 			tempLetterNum += temp[j];
 		}
@@ -94,7 +94,7 @@ void CountWord(string foutName)//Í³¼Æµ¥´ÊÊıÒÔ¼°ĞĞÊıº¯Êı
 	{
 		bool unBlank;
 		for (int i = 0; i < tempLetterNum.size(); i++)
-		{//¼ìÑé·Ç¿Õ°××Ö·ûĞĞ
+		{//æ£€éªŒéç©ºç™½å­—ç¬¦è¡Œ
 			if (tempLetterNum[i] > 32)
 				unBlank = true;
 		}
@@ -104,9 +104,8 @@ void CountWord(string foutName)//Í³¼Æµ¥´ÊÊıÒÔ¼°ĞĞÊıº¯Êı
 		str.push_back(tempLetterNum);
 		tempLetterNum.clear();
 	}
-
 	for (j = 0; j < str.size(); j++)
-	{//×Ö·û´®¿ªÍ·ËÄ¸ö×Ö·û¾ùÎª×ÖÄ¸²ÅÄÜÊÓ×÷µ¥´Ê
+	{//å­—ç¬¦ä¸²å¼€å¤´å››ä¸ªå­—ç¬¦å‡ä¸ºå­—æ¯æ‰èƒ½è§†ä½œå•è¯
 		bool unBlank = false, isLetter = false;
 		for (int i = 0; i < str[j].size(); i++)
 		{
@@ -138,14 +137,14 @@ void CountWord(string foutName)//Í³¼Æµ¥´ÊÊıÒÔ¼°ĞĞÊıº¯Êı
 }
 
 
-void CountMainWord(string foutName)//´ÊÆµÍ³¼ÆÓëÆµÂÊÅÅĞĞÇ°Ê®µ¥´ÊÊä³ö
+void CountMainWord(string foutName)//è¯é¢‘ç»Ÿè®¡ä¸é¢‘ç‡æ’è¡Œå‰åå•è¯è¾“å‡º
 {
 	ofstream fout(foutName, ios::app);
 	int time;
 	bool flag = true;
 	iter = strmap.begin();
 	int min_val = strmap.size() < 10 ? strmap.size() : 10;
-	for (int s1 = 0; s1 < min_val; s1++)//²ÉÓÃ±éÀú10´ÎµÄµÄ·½Ê½£¬Èç¹û²»×ãÊ®´ÎboolÖµÖÃfalseÌø³öÑ­»·
+	for (int s1 = 0; s1 < min_val; s1++)//é‡‡ç”¨éå†10æ¬¡çš„çš„æ–¹å¼ï¼Œå¦‚æœä¸è¶³åæ¬¡boolå€¼ç½®falseè·³å‡ºå¾ªç¯
 	{
 		if (flag == false)
 		{
@@ -153,7 +152,7 @@ void CountMainWord(string foutName)//´ÊÆµÍ³¼ÆÓëÆµÂÊÅÅĞĞÇ°Ê®µ¥´ÊÊä³ö
 		}
 		flag = true;
 		time = -1;
-		while (iter != strmap.end())//²ÉÓÃmap½øĞĞ´æÈ¡±éÀú
+		while (iter != strmap.end())//é‡‡ç”¨mapè¿›è¡Œå­˜å–éå†
 		{
 			if (iter->second > time)
 			{
