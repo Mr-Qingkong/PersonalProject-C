@@ -37,10 +37,10 @@ void ReadFile(string fName) //读取文件并缓存
 }
 
 
-void CountChar(string foutName) //统计文件字符
+void CountChar(string foutName) //输出字符统计数
 {
 	ofstream fout(foutName);
-	fout << "characters：" << charNum << endl;//输出字符统计数
+	fout << "characters：" << charNum << endl;
 	fout.close();
 }
 
@@ -149,7 +149,7 @@ void CountMainWord(string foutName)//词频统计与频率排行前十单词输出
 		}
 		flag = true;
 		time = -1;
-		while (iter != strmap.end())//采用map函数进行存取遍历
+		while (iter != strmap.end())//采用map进行存取遍历
 		{
 			if (iter->second > time)
 			{
@@ -158,7 +158,7 @@ void CountMainWord(string foutName)//词频统计与频率排行前十单词输出
 			}
 			iter++;
 		}
-		fout << mainWord << " :" << time << endl;
+		fout << mainWord << ": " << time << endl;
 		iter = strmap.begin();
 		strmap[mainWord] = -10;
 	}

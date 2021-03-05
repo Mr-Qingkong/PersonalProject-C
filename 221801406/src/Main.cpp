@@ -9,9 +9,9 @@ using namespace std;
 
 int main(int argc, char* argv[])
 {
-	ReadFile("input.txt");
-	CountChar("output.txt");
-	CountWord("output.txt");
-	CountMainWord("output.txt");
+	ReadFile(argv[1]);
+	CountChar(argv[2]);
+	CountWord(argv[2]);
+	CountMainWord(argv[2]);
 	return 0;
 }
