@@ -29,6 +29,10 @@ void ReadFile(string fName) //读取文件并缓存
 	{
 		while (fin.get(character))
 		{
+			if (character >= 'A' && character <= 'Z')
+			{
+				character += 32;
+			}
 			temp += character;
 			++charNum;
 		}
@@ -160,7 +164,7 @@ void CountMainWord(string foutName)//词频统计与频率排行前十单词输出
 		}
 		fout << mainWord << ": " << time << endl;
 		iter = strmap.begin();
-		strmap[mainWord] = -10;
+		strmap[mainWord] = -9;
 	}
 	fout.close();
 }
