@@ -14,8 +14,8 @@ vector<string> words;
 map<string, int> strmap;
 map<string, int>::iterator iter;
 string mainWord;
-int w;
 int max;
+
 
 void ReadFile(string fName) //读取文件并缓存
 {
@@ -23,7 +23,7 @@ void ReadFile(string fName) //读取文件并缓存
 	ifstream fin(fName);
 	if (!fin)
 	{
-		cout << "open file error" << endl;//文件报错
+		cout << "open file error" << endl;//文件打开发生错误
 	}
 	else
 	{
@@ -33,18 +33,21 @@ void ReadFile(string fName) //读取文件并缓存
 			++charNum;
 		}
 	}
+	fin.close();
 }
 
 
-void CountChar(string fName) //统计文件字符
+void CountChar(string foutName) //统计文件字符
 {
-	ReadFile(fName);
-	cout << "characters：" << charNum << endl;//输出字符统计数
+	ofstream fout(foutName);
+	fout << "characters：" << charNum << endl;//输出字符统计数
+	fout.close();
 }
 
 
-void CountWord(string fName)//统计单词数以及行数函数
+void CountWord(string foutName)//统计单词数以及行数函数
 {
+	ofstream fout(foutName, ios::app);//注意要使用追加方式打开文件
 	string tempLetterNum;
 	string tempLine;
 	int j;
@@ -120,8 +123,9 @@ void CountWord(string fName)//统计单词数以及行数函数
 			words.push_back(str[j]);
 		}
 	}
-	cout << "words: " << words.size() << endl;
-	cout << "lines: " << lineNum << endl;
+	fout << "words: " << words.size() << endl;
+	fout << "lines: " << lineNum << endl;
+	fout.close();
 
 	for (j = 0; j < words.size(); j++)
 	{
@@ -130,8 +134,9 @@ void CountWord(string fName)//统计单词数以及行数函数
 }
 
 
-void CountMainWord()//词频统计与频率排行前十单词输出
+void CountMainWord(string foutName)//词频统计与频率排行前十单词输出
 {
+	ofstream fout(foutName, ios::app);
 	int time;
 	bool flag = true;
 	iter = strmap.begin();
@@ -153,8 +158,9 @@ void CountMainWord()//词频统计与频率排行前十单词输出
 			}
 			iter++;
 		}
-		cout << "<" << mainWord << ">: " << time << endl;
+		fout << mainWord << " :" << time << endl;
 		iter = strmap.begin();
 		strmap[mainWord] = -10;
 	}
+	fout.close();
 }
